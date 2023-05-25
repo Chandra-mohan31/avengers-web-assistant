@@ -1,4 +1,4 @@
-
+let api_key = 'AIzaSyDSfh59EbWyWLsuWpqMZo--JeNy0_0Psjs';
 let map, infoWindow;
 const infinityStonesAndThanosLocations = {
   "infinityStones": [
@@ -140,6 +140,34 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return distance;
 }
 
+
+//get avengers location or thanos location on click of marker
+const getMarkerLocation = (latitude,longitude) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDSfh59EbWyWLsuWpqMZo--JeNz0_0Psjs`;
+
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'OK') {
+        const results = data.results;
+        if (results.length > 0) {
+          console.log(results[0].formatted_address);
+        } else {
+          console.log('No results found');
+        }
+      } else {
+        console.log('Geocoding API request failed');
+      }
+    })
+    .catch(error => {
+      console.log('Error:', error);
+    });
+  
+}
+
+// getMarkerLocation(-22.9068,-43.1729);
+
 // Calculate distances between each Infinity Stone and Thanos' location
 var distances = infinityStonesAndThanosLocations.infinityStones.map(infinityStone => {
   const distance = calculateDistance(
@@ -187,15 +215,13 @@ function initMap() {
     const isInDistance = distances.find(distanceStone => distanceStone.name === infinityStone.name);
     console.log(isInDistance);
     if(isInDistance){
-      // marker.setIcon({
-        
-      //   scale: 8
-      // });
-      const infowindow = new google.maps.InfoWindow({
-        content: "<p>Thanos is: " + Math.round(isInDistance?.distance) + " kms away of" + isInDistance?.name + "</p>",
-      });
+      
+      
     
       google.maps.event.addListener(marker, "click", () => {
+        const infowindow = new google.maps.InfoWindow({
+          content: "<p>Thanos is: " + Math.round(calculateDistance(thanosLocation.latitude,thanosLocation.longitude,pos.lat,pos.lng)) + " kms away of" + isInDistance?.name + "</p>",
+        });
         infowindow.open(map, marker);
       });
     
@@ -224,6 +250,17 @@ function initMap() {
        }
     });
 
+   
+  
+    google.maps.event.addListener(avengerMarker, "click", (event) => {
+      const infowindowA = new google.maps.InfoWindow({
+        //get location of marker
+        content: `<div>${avenger.name}'s Location : Lat : ${event.latLng.lat()} Lng : ${ event.latLng.lng()}</div>`,
+      });
+      infowindowA.open(map, avengerMarker);
+
+    });
+
     avengerMarker.setMap(map);
   });
   
@@ -246,6 +283,14 @@ function initMap() {
       scaledSize: iconSize
     }
     
+  });
+  google.maps.event.addListener(thanosMarker, "click", (event) => {
+    const infowindowThanos = new google.maps.InfoWindow({
+      //get location of marker
+      content: `<div>Thanos's Location : Lat : ${event.latLng.lat()} Lng : ${ event.latLng.lng()}</div>`,
+    });
+    infowindowThanos.open(map, thanosMarker);
+
   });
   thanosMarker.setMap(map);
   
@@ -309,6 +354,8 @@ const moveThanos = () => {
   const newLng = Math.random() * (maxLng - minLng) + minLng;
   
   thanosMarker.setPosition(new google.maps.LatLng(newLat, newLng));
+  thanosLocation.latitude = newLat;
+  thanosLocation.longitude = newLng;
   let alertMessage = '';
   infinityStonesAndThanosLocations.infinityStones.map(infinityStone => {
     let distance = calculateDistance(
@@ -336,8 +383,8 @@ const moveThanos = () => {
 }
 
 
-
- setInterval(moveThanos,10000);
+//move thanos check every 20sec
+//  setInterval(moveThanos,20000);
 
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {

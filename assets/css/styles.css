@@ -15,6 +15,17 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    background-image: url("../images/background-marvel.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+      /* background-repeat: repeat-y; */
+    background-color: lightgrey;
+    
+    
+  }
+  body::-webkit-scrollbar{
+    display: none;
   }
   
   .custom-map-control-button {
@@ -35,7 +46,9 @@
 
   .stone-list {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
   }
 
   .stone-item {
@@ -47,3 +60,76 @@
     width: 150px;
     height: 150px;
   }
+
+  #avengers_members_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
+  #avengers_members_container > div{
+    
+    background-color: rgba(0, 0, 0, 0.8);
+    color: whitesmoke;
+    height: 500px;
+    width: 300px;
+    margin: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    
+  }
+
+  #avengers_members_container > div > h1{
+    text-align: center;
+    font-size: 40px;
+  }
+ img{
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+ }
+
+ #avengers_members_container > div > div > p{
+  display: block;
+  text-overflow: clip;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 12em;
+  
+ }
+
+ #stone_image{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  
+ }
+
+
+ .card{
+  background-color: rgba(0, 0, 0,0.8);
+
+ }
+
+ /* some test */
+/* .image_container{
+  position: relative;
+}
+
+.firstimage,.secondimage{
+  position: absolute;
+  
+  
+} */
+
+
+/* .secondimage{
+  opacity: 1;
+}
+.secondimage:hover{
+  opacity: 0;
+} */
+
