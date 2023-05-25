@@ -72,6 +72,8 @@ const infinityStonesAndThanosLocations = {
 
 
 
+
+
 const thanosLocation = infinityStonesAndThanosLocations.thanosLocation;
 
 // Function to calculate the distance between two points using the Haversine formula
@@ -91,7 +93,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 // Calculate distances between each Infinity Stone and Thanos' location
-const distances = infinityStonesAndThanosLocations.infinityStones.map(infinityStone => {
+var distances = infinityStonesAndThanosLocations.infinityStones.map(infinityStone => {
   const distance = calculateDistance(
     thanosLocation.latitude,
     thanosLocation.longitude,
@@ -111,11 +113,13 @@ distances.sort((a, b) => a.distance - b.distance);
 // const nearestLocations = distances.slice(0, 3);
 
 // center lat long - { lat: -34.397, lng: 150.644 },
+var thanosMarker;
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: thanosLocation?.latitude, lng: thanosLocation?.longitude },
     zoom: 3,
   });
+  
   var iconSize = new google.maps.Size(40, 40); // Define the desired size of the icon
   infoWindow = new google.maps.InfoWindow();
   infinityStonesAndThanosLocations?.infinityStones.forEach(infinityStone => {
@@ -159,20 +163,22 @@ function initMap() {
 
   
 
-  var thanosMarker = new google.maps.Marker({
+  thanosMarker = new google.maps.Marker({
     position: {
       lat : infinityStonesAndThanosLocations?.thanosLocation.latitude,
       lng: infinityStonesAndThanosLocations?.thanosLocation.longitude
     },
     map: map,
-    title: `Thanos Location :${infinityStonesAndThanosLocations?.thanosLocation.city}`,
+    draggable: true,
+    title: `Thanos Location`,
     icon: {
       url: '../assets/images/thanos.png',
       scaledSize: iconSize
     }
+    
   });
   thanosMarker.setMap(map);
-
+  
 
   const locationButton = document.createElement("button");
 
@@ -207,7 +213,8 @@ function initMap() {
           };
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent("Your Location Found.");
+          var avengersIcon = "../assets/images/avengers.png";
+          infoWindow.setContent(`<div><p>Your Location.</p><img src=${avengersIcon} alt="avengers icon" style="width: 50px; height: 50px;" /></div>`);
           infoWindow.open(map);
           map.setCenter(pos);
         },
@@ -221,6 +228,49 @@ function initMap() {
     }
   });
 }
+
+const moveThanos = () => {
+  const maxLat = 90;
+  const minLat = -90;
+  const maxLng = 180;
+  const minLng = -180;
+
+  const newLat = Math.random() * (maxLat - minLat) + minLat;
+  const newLng = Math.random() * (maxLng - minLng) + minLng;
+  
+  thanosMarker.setPosition(new google.maps.LatLng(newLat, newLng));
+  let alertMessage = '';
+  infinityStonesAndThanosLocations.infinityStones.map(infinityStone => {
+    let distance = calculateDistance(
+      newLat,
+      newLng,
+      infinityStone.location.latitude,
+      infinityStone.location.longitude
+    );
+    console.log(distance);
+    if(distance < 5000){
+      alertMessage = alertMessage + `Alert Avengers Thanos is near to ${infinityStone.name} : Location : ${infinityStone.location.city}\n`;
+
+    }
+    
+  
+  });
+  if(alertMessage.length != 0){
+    alert(alertMessage);
+  }
+
+   
+
+  
+
+}
+
+// const makeThanosMoveEveryThreeSeconds = (thanosMarker) => {
+//   setInterval(3000,moveThanos(thanosMarker));
+// }
+
+setInterval(moveThanos,10000);
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);

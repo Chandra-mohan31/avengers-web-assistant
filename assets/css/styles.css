@@ -32,3 +32,18 @@
   .custom-map-control-button:hover {
     background: rgb(235, 235, 235);
   }
+
+  .stone-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .stone-item {
+    margin: 10px;
+    text-align: center;
+  }
+
+  .stone-item img {
+    width: 150px;
+    height: 150px;
+  }
