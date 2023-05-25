@@ -68,7 +68,55 @@ const infinityStonesAndThanosLocations = {
     "city": "San Francisco"
   }
 }
-
+const avengersData = {
+  "avengers": [
+    {
+      "name": "Iron Man",
+      "location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "city": "New York City"
+      },
+      "image": "../assets/images/iron-man-removebg-preview.png"
+    },
+    {
+      "name": "Captain America",
+      "location": {
+        "latitude": 34.0522,
+        "longitude": -118.2437,
+        "city": "Los Angeles"
+      },
+      "image": "../assets/images/captain-america-removebg-preview.png"
+    },
+    {
+      "name": "Thor",
+      "location": {
+        "latitude": 51.5074,
+        "longitude": -0.1278,
+        "city": "London"
+      },
+      "image": "../assets/images/thor-icon-removebg-preview.png"
+    },
+    {
+      "name": "Black Widow",
+      "location": {
+        "latitude": 55.7558,
+        "longitude": 37.6176,
+        "city": "Moscow"
+      },
+      "image": "../assets/images/black-widow-removebg-preview.png"
+    },
+    {
+      "name": "Hulk",
+      "location": {
+        "latitude": -23.5505,
+        "longitude": -46.6333,
+        "city": "São Paulo"
+      },
+      "image": "../assets/images/hulk-icon-removebg-preview.png"
+    }
+  ]
+};
 
 
 
@@ -158,7 +206,29 @@ function initMap() {
     
   });
   
+
+  avengersData?.avengers.map(avenger=>{
+    
+    const pos = {
+      lat: avenger.location.latitude,
+      lng: avenger.location.longitude,
+    };
+    var avengerMarker = new google.maps.Marker({
+      position: pos,
+      map: map,
+      draggable: true,
+      title: `${avenger.name}`,
+       icon: {
+         url: avenger.image,
+         scaledSize: new google.maps.Size(40, 40)
+       }
+    });
+
+    avengerMarker.setMap(map);
+  });
   
+
+
 
 
   
@@ -265,11 +335,9 @@ const moveThanos = () => {
 
 }
 
-// const makeThanosMoveEveryThreeSeconds = (thanosMarker) => {
-//   setInterval(3000,moveThanos(thanosMarker));
-// }
 
-setInterval(moveThanos,10000);
+
+ setInterval(moveThanos,10000);
 
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
