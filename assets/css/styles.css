@@ -94,11 +94,10 @@
 
  #avengers_members_container > div > div > p{
   display: block;
-  text-overflow: clip;
-  word-wrap: break-word;
-  overflow: hidden;
+ 
   max-height: 12em;
-  
+
+  overflow-y: scroll;
  }
 
  #stone_image{
@@ -111,25 +110,41 @@
 
  .card{
   background-color: rgba(0, 0, 0,0.8);
-
+  
  }
-
- /* some test */
-/* .image_container{
-  position: relative;
+ /* .carousel-item{
+  overflow-y: scroll;
+  height: 80vh;
+ } */
+ ::-webkit-scrollbar{
+  display: none;
+ }
+#desc{
+  height: 140px;
+  overflow-y: scroll;
 }
 
-.firstimage,.secondimage{
-  position: absolute;
-  
-  
-} */
+#alert_box{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-
-/* .secondimage{
-  opacity: 1;
+  z-index: 1;
 }
-.secondimage:hover{
-  opacity: 0;
-} */
+
+.marker-icon {
+  animation: vibrate 0.3s infinite linear;
+}
+
+@keyframes vibrate {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-2px, 0); }
+  80% { transform: translate(0, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+
 

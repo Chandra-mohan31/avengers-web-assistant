@@ -1,13 +1,13 @@
 
-const fetchInfinityStonesLocationAndThanosLocation = async () => {
-    fetch('data.json')
-      .then(res => res.json())
-      .then(data=> console.log(data))
-      .catch(err=>console.log(err))
-  };
+// const fetchInfinityStonesLocationAndThanosLocation = async () => {
+//     fetch('data.json')
+//       .then(res => res.json())
+//       .then(data=> console.log(data))
+//       .catch(err=>console.log(err))
+//   };
   
   
-  fetchInfinityStonesLocationAndThanosLocation();
+//   fetchInfinityStonesLocationAndThanosLocation();
 
   // js goes here
 // const infinityStonesAndThanosLocations = require("./infinitystones");
@@ -46,3 +46,5 @@ const fetchInfinityStonesLocationAndThanosLocation = async () => {
 
 
 // fetchInfinityStonesLocationAndThanosLocation();
+
+

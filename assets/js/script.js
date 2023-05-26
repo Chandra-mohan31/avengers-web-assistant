@@ -118,6 +118,7 @@ const avengersData = {
   ]
 };
 
+const avengersMarkersArray = [];
 
 
 
@@ -190,6 +191,10 @@ distances.sort((a, b) => a.distance - b.distance);
 
 // center lat long - { lat: -34.397, lng: 150.644 },
 var thanosMarker;
+
+
+
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: thanosLocation?.latitude, lng: thanosLocation?.longitude },
@@ -233,24 +238,27 @@ function initMap() {
   });
   
 
-  avengersData?.avengers.map(avenger=>{
+  avengersData?.avengers.map((avenger,i)=>{
     
     const pos = {
       lat: avenger.location.latitude,
       lng: avenger.location.longitude,
     };
-    var avengerMarker = new google.maps.Marker({
+    var avengerMarker= new google.maps.Marker({
       position: pos,
       map: map,
       draggable: true,
       title: `${avenger.name}`,
        icon: {
          url: avenger.image,
-         scaledSize: new google.maps.Size(40, 40)
+         scaledSize: new google.maps.Size(40, 40),
+         
        }
     });
+    
+    avengersMarkersArray.push(avengerMarker);
 
-   
+
   
     google.maps.event.addListener(avengerMarker, "click", (event) => {
       const infowindowA = new google.maps.InfoWindow({
@@ -342,7 +350,51 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+
+  
+
 }
+
+const assembleAvengers = (newLat,newLng) => {
+  console.log(avengersMarkersArray);
+  console.log(newLat);
+  console.log(newLng);
+  avengersMarkersArray.forEach(aMarker=>{
+    aMarker.setPosition(new google.maps.LatLng(newLat, newLng));
+    // MarkerAnimate.init({ map: map });
+    // MarkerAnimate.addMarker(aMarker, 'bounce');
+  })
+  document.getElementById('alert_box').innerHTML = '';
+
+  map.panTo(new google.maps.LatLng(newLat, newLng));
+  alert("avengers assembled at thanos location!");
+
+  
+}
+
+const closeAlert = () => {
+  document.getElementById('alert_box').innerHTML = '' 
+}
+
+const createAlertBox = (message,newLat,newLng) => {
+  let alert_box = document.getElementById("alert_box");
+ console.log(alert_box);
+  alert_box.innerHTML = `
+  <div class="card w-50">
+  <div class="card-body">
+    <h5 class="card-title">
+    <button class="btn"><span aria-hidden="true" onclick="closeAlert()">&times;</span></button>
+  </h5>
+    <p class="card-text">${message}</p>
+    <button class="btn btn-primary" onclick="assembleAvengers(${newLat},${newLng})">Assemble avengers for fight.</button>
+  </div>
+</div>
+  `;
+
+
+}
+//createAlertBox();
+
 
 const moveThanos = () => {
   const maxLat = 90;
@@ -373,7 +425,7 @@ const moveThanos = () => {
   
   });
   if(alertMessage.length != 0){
-    alert(alertMessage);
+    createAlertBox(alertMessage,newLat,newLng);
   }
 
    
@@ -384,7 +436,7 @@ const moveThanos = () => {
 
 
 //move thanos check every 20sec
-//  setInterval(moveThanos,20000);
+ setInterval(moveThanos,60000);
 
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -398,8 +450,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 window.initMap = initMap;
-
-
 
 
 

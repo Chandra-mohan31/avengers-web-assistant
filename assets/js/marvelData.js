@@ -8,19 +8,21 @@ function getCharacterDetails(character)
     const publicKey = 'bc5cf50cbc5636e486646166beb3cb1c';
     const hashKey = '845542f6fc6cd5e3ef361b072605f084';
     const ts = new Date().getTime();
-    console.log(ts);
-
+  
     
     const api = `https://gateway.marvel.com/v1/public/characters?name=${character}&apikey=38e1ffdaeaa9b9bef76cae16bc306f07&hash=50b69e3db7031ec68231ea6c05198f40&ts=1684993946733`;
     fetch(api)
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
+            console.log("Data fetched from API : ",data);
             displaySuperHerosOfAvengersTeam(data);
 
         }
         )
         .catch(err => console.log(err))
+    
+
+   
 }
 
 
