@@ -9,7 +9,7 @@ const infinityStonesAndThanosLocations = {
         "longitude": -0.1278,
         "city": "London"
       },
-      "image":"../assets/images/time-stone.png"
+      "image":"./assets/images/time-stone.png"
     },
     {
       "name": "Space Stone",
@@ -18,7 +18,7 @@ const infinityStonesAndThanosLocations = {
         "longitude": -74.0060,
         "city": "New York City"
       },
-      "image":"../assets/images/space-stone.png"
+      "image":"./assets/images/space-stone.png"
 
     },
     {
@@ -28,7 +28,7 @@ const infinityStonesAndThanosLocations = {
         "longitude": 151.2099,
         "city": "Sydney"
       },
-      "image":"../assets/images/reality-stone.png"
+      "image":"./assets/images/reality-stone.png"
 
     },
     {
@@ -38,7 +38,7 @@ const infinityStonesAndThanosLocations = {
         "longitude": 28.0473,
         "city": "Johannesburg"
       },
-      "image":"../assets/images/mind-stone.png"
+      "image":"./assets/images/mind-stone.png"
 
     },
     {
@@ -48,7 +48,7 @@ const infinityStonesAndThanosLocations = {
         "longitude": -118.2437,
         "city": "Los Angeles"
       },
-      "image":"../assets/images/power-stone.png"
+      "image":"./assets/images/power-stone.png"
 
     },
     {
@@ -58,7 +58,7 @@ const infinityStonesAndThanosLocations = {
         "longitude": -43.1729,
         "city": "Rio de Janeiro"
       },
-      "image":"../assets/images/soul-stone.png"
+      "image":"./assets/images/soul-stone.png"
 
     }
   ],
@@ -77,7 +77,7 @@ const avengersData = {
         "longitude": -74.0060,
         "city": "New York City"
       },
-      "image": "../assets/images/iron-man-removebg-preview.png"
+      "image": "./assets/images/iron-man-removebg-preview.png"
     },
     {
       "name": "Captain America",
@@ -86,7 +86,7 @@ const avengersData = {
         "longitude": -118.2437,
         "city": "Los Angeles"
       },
-      "image": "../assets/images/captain-america-removebg-preview.png"
+      "image": "./assets/images/captain-america-removebg-preview.png"
     },
     {
       "name": "Thor",
@@ -95,7 +95,7 @@ const avengersData = {
         "longitude": -0.1278,
         "city": "London"
       },
-      "image": "../assets/images/thor-icon-removebg-preview.png"
+      "image": "./assets/images/thor-icon-removebg-preview.png"
     },
     {
       "name": "Black Widow",
@@ -104,7 +104,7 @@ const avengersData = {
         "longitude": 37.6176,
         "city": "Moscow"
       },
-      "image": "../assets/images/black-widow-removebg-preview.png"
+      "image": "./assets/images/black-widow-removebg-preview.png"
     },
     {
       "name": "Hulk",
@@ -113,7 +113,7 @@ const avengersData = {
         "longitude": -46.6333,
         "city": "São Paulo"
       },
-      "image": "../assets/images/hulk-icon-removebg-preview.png"
+      "image": "./assets/images/hulk-icon-removebg-preview.png"
     }
   ]
 };
